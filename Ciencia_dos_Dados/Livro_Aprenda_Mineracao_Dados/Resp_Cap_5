@@ -1,0 +1,71 @@
+5.5. Exercícios
+1. Em alguns dos exemplos de mineração discutidos neste capítulo, a base de
+dados transacional Registro de Pedidos foi usada para descoberta de regras
+de associação, considerando itens solicitados juntos em uma refeição. Essa
+análise, portanto, se referiu a exemplos positivos (o item FOI solicitado no
+pedido). Entretanto, existe a possibilidade de analisar os itens não
+solicitados nos pedidos e, então, implementar uma análise de exemplos
+negativos. Considerando essa possibilidade e o contexto em que a base de
+dados transacional Registro de Pedidos é construída:
+• Construa alguns exemplos de regras de associação contextualizadas no
+mundo real, que façam referência apenas à análise de exemplos
+negativos (itens não solicitados nos pedidos).
+
+  RESPOSTA : 
+    Regra 1: Se o cliente não pediu arroz, então é provável que não tenha pedido feijão.
+    Contexto: Em refeições típicas, arroz e feijão são frequentemente solicitados juntos. A ausência de um pode indicar que o cliente optou por outra combinação.
+
+    Regra 2: Se o cliente não pediu sobremesa, então é provável que não tenha pedido café.
+    Contexto: Clientes que optam por não incluir sobremesa podem também evitar café, sugerindo uma preferência por refeições mais leves.
+
+    Regra 3: Se o cliente não pediu um prato principal, então é provável que não tenha solicitado acompanhamentos.
+    Contexto: A falta de um prato principal pode indicar que o cliente está fazendo uma refeição mais simples, reduzindo a chance de pedir acompanhamentos.
+
+  
+• Apresente a solução completa para a análise de apenas exemplos
+negativos, seguindo os passos que constituem os algoritmos Apriori e
+FP-Growth, considerando suporte mínimo de 40% e confiança mínima
+de 80% (lembre-se de que os algoritmos são equivalentes, embora
+diferentes, ou seja, as mesmas regras devem ser geradas ao final do
+processo se limiares iguais para as medidas de suporte/frequência e para
+a medida de confiança forem usados em ambos os algoritmos).
+
+  RESPOSTA: 
+    Passos dos Algoritmos Apriori e FP-Growth
+
+    Definição do Conjunto de Dados:
+        Conjunto de pedidos com itens solicitados e não solicitados (exemplos negativos).
+    Cálculo do Suporte:
+        O suporte é a proporção de transações que contêm um item ou conjunto de itens em relação ao total de transações.
+        Suporte mínimo: 40%.
+    Cálculo da Confiança:
+        A confiança mede a frequência com que os itens aparecem juntos nas transações.
+        Confiança mínima: 80%.
+    Algoritmo Apriori:
+        Geração de candidatos: Criação de conjuntos de itens e contagem do suporte.
+        Filtragem: Manter apenas os conjuntos que atendem ao suporte mínimo.
+        Repetição até que nenhum novo conjunto seja gerado.
+    Algoritmo FP-Growth:
+        Construção da árvore FP (Frequent Pattern Tree) com base nos dados.
+        Extração dos padrões frequentes da árvore.
+
+    Exemplo Prático:
+
+    Suporte: Se temos 100 pedidos e 40 deles não incluem arroz, então o suporte para a regra "não pedir arroz implica não pedir feijão" é 40%.
+    Confiança: Se entre os 40 pedidos sem arroz, 32 também não pediram feijão, a confiança seria 3240=80%4032​=80%.
+
+    Ambos os algoritmos devem gerar regras semelhantes se aplicados com os mesmos limites.
+
+    
+• Discuta a utilidade das regras de associação geradas no item anterior.
+
+  RESPOSTA:
+
+    Entendimento do Comportamento do Cliente:
+        Identificar padrões nas preferências dos clientes que podem não ser evidentes ao focar apenas em itens solicitados.
+    Desenvolvimento de Estratégias de Marketing:
+        Criar promoções ou combos que incentivem a inclusão dos itens frequentemente deixados de fora dos pedidos.
+    Otimização do Menu:
+        Ajustar o cardápio com base nas combinações mais populares e evitar opções que raramente são solicitadas juntas.
+    Melhoria na Experiência do Cliente:
+        Oferecer sugestões personalizadas baseadas nas escolhas anteriores, aumentando a satisfação e potencialmente as vendas.
